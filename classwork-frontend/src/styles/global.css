@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	@apply bg-genz-bg text-genz-text font-genz min-h-screen;
+}
+
+.card {
+	@apply bg-genz-card rounded-xl shadow-lg p-6;
+}
+
+.btn-primary {
+	@apply bg-genz-accent text-white font-bold py-2 px-4 rounded hover:bg-genz-accent2 transition;
+}
+
+.btn-secondary {
+	@apply bg-genz-accent2 text-white font-bold py-2 px-4 rounded hover:bg-genz-accent3 transition;
+}
+
+.muted {
+	@apply text-genz-muted;
+}
+
+/* Dark mode toggle (optional) */
+.dark body {
+	@apply bg-genz-bg text-genz-text;
+}
