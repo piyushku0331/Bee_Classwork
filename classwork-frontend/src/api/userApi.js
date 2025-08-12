@@ -1,3 +1,12 @@
+// Send password reset email
+export async function sendPasswordResetEmail(email) {
+  const res = await fetch('/api/users/forgot-password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+  return res.json();
+}
 // User API utility for registration, login, profile, and OTP
 const API_BASE = '/api/users';
 const OTP_API = '/api/verify-otp';

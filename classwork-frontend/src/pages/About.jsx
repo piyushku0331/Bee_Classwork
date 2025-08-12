@@ -1,18 +1,40 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
-const About = () => (
-  <div className="card max-w-2xl mx-auto mt-24 flex flex-col items-center">
-    <img
-      src="/images/blog/decor1.jpg"
-      alt="Decorative"
-      className="w-32 h-32 object-cover rounded-full mb-4 shadow-lg border-2 border-genz-accent"
-    />
-    <h1 className="text-3xl font-bold mb-4 text-genz-accent">About Us</h1>
-    <p className="text-genz-text mb-2">
-      Blogify is a modern GenZ-inspired blogging platform where you can share your stories, ideas, and connect with a vibrant community. Our mission is to empower everyone to express themselves and discover new perspectives.
-    </p>
-    <p className="muted">Made with 💜 for the next generation of creators.</p>
-  </div>
-);
+const About = () => {
+  return (
+    <div className="about-bg">
+      {/* Glassmorphism Card */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, rotateY: 20 }}
+        animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        className="about-card"
+      >
+        <img
+          src="/images/blog/decor1.jpg"
+          alt="Decorative"
+          className="about-card-img"
+        />
+        <h1 className="about-card-title">
+          About Us
+        </h1>
+        <p className="about-card-desc">
+          Blogify isn’t just a blogging platform — it’s a universe for creativity, ideas, and
+          connections. Inspired by the vibrant energy of Gen Z, we’ve built a space where
+          authenticity meets innovation.
+        </p>
+        <p className="about-card-desc2">
+          From sharing personal stories to exploring trending topics, Blogify is your stage to shine.
+          We empower voices from all walks of life to inspire, educate, and entertain. Whether you’re
+          a casual writer, an aspiring journalist, or a storyteller at heart — this is your home.
+        </p>
+        <p className="about-card-signoff">
+          Made with 💜 for the next generation of dreamers, thinkers, and creators.
+        </p>
+      </motion.div>
+    </div>
+  );
+};
 
 export default About;

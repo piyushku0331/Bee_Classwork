@@ -15,7 +15,7 @@ const DarkModeToggle = () => {
 
   return (
     <button
-      className="btn-secondary fixed top-4 left-4 z-50"
+      className="btn-secondary px-4 py-2 rounded font-genz text-lg shadow-md border border-genz-accent hover:bg-genz-accent hover:text-white transition"
       onClick={() => setDark((d) => !d)}
       aria-label="Toggle dark mode"
     >

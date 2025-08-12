@@ -1,11 +1,16 @@
 const escapeHTML = require('../config/safeEmail');
 
-export const generatePostPublishedEmail = (username, postTitle, postLink) => {
-  const safeUsername = escapeHTML(username);
-  const safePostTitle = escapeHTML(postTitle);
-  const safePostLink = encodeURI(postLink);
+const generatePostPublishedEmail = (username, postTitle, postLink) => {
+  const safeUsername = escapeHTML(username || '');
+  const safePostTitle = escapeHTML(postTitle || '');
+  const safePostLink = escapeHTML(postLink || '');
 
-  return `
+  const textVersion = `Hi ${safeUsername},
+
+Your new blog post "${safePostTitle}" is now live on Blogify!
+View it here: ${safePostLink}`;
+
+  const htmlVersion = `
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -13,7 +18,7 @@ export const generatePostPublishedEmail = (username, postTitle, postLink) => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Blog Post Published - Blogify</title>
   </head>
-  <body style="background-color:#f9fafb; font-family: 'Inter', sans-serif; padding: 2rem;">
+  <body style="background-color:#f9fafb; font-family: sans-serif; padding: 2rem;">
     <div style="max-width: 600px; margin: auto; background-color: white; border-radius: 0.75rem; padding: 2rem; border: 1px solid #e5e7eb;">
       <h1 style="font-size: 1.875rem; font-weight: bold; color: #111827; text-align: center; margin-bottom: 1rem;">
         New Blog Post Published 🎉
@@ -36,4 +41,8 @@ export const generatePostPublishedEmail = (username, postTitle, postLink) => {
   </body>
   </html>
   `;
+
+  return { html: htmlVersion, text: textVersion };
 };
+
+module.exports = { generatePostPublishedEmail };

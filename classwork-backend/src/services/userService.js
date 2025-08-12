@@ -2,7 +2,7 @@
 const User = require('../models/user');
 const OTP = require('../models/otp');
 const logger = require('../utils/logger');
-const { sendOTP } = require('../config/validator');
+const { sendOtpEmail } = require('../config/validator');
 
 
 /**
@@ -21,7 +21,7 @@ exports.registerUser = async (userData) => {
             is_verified: false
         });
         const savedUser = await user.save();
-        await sendOTP(user.email);
+    await sendOtpEmail(user.email);
         logger.info(`User registered: ${user.email}`);
         return { id: savedUser._id, email: savedUser.email };
     } catch (error) {
@@ -61,6 +61,7 @@ exports.loginUser = async ({ email, password }) => {
  * @param {string} otp
  * @returns {Promise<Object>}
  */
+const sendWelcomeEmail = require('../utils/sendWelcomeEmail');
 exports.verifyOtp = async (email, otp) => {
     try {
         const otpRecord = await OTP.findOne({ email, otp });
@@ -69,6 +70,11 @@ exports.verifyOtp = async (email, otp) => {
         }
         await User.updateOne({ email }, { is_verified: true });
         await OTP.deleteMany({ email });
+        // Send welcome email after successful verification
+        const user = await User.findOne({ email });
+        if (user) {
+          await sendWelcomeEmail(user.email, user.name || user.email);
+        }
         logger.info(`OTP verified for: ${email}`);
         return { email, verified: true };
     } catch (error) {

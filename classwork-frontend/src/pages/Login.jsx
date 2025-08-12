@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { loginUser } from '../api/userApi';
 import { Link } from 'react-router-dom';
@@ -27,36 +28,103 @@ const Login = () => {
   };
 
   return (
-    <div className="card max-w-md mx-auto mt-24">
-      <h1 className="text-2xl font-bold text-genz-accent mb-4">Login</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input
-          className="px-4 py-2 rounded bg-genz-bg text-genz-text border border-genz-accent focus:outline-none"
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          className="px-4 py-2 rounded bg-genz-bg text-genz-text border border-genz-accent focus:outline-none"
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
-        {error && <div className="text-red-500 text-sm">{error}</div>}
-        <button className="btn-primary w-full" type="submit" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-        <Link to="/forgot-password" className="muted hover:text-genz-accent2 text-sm text-right">Forgot password?</Link>
-        <div className="muted text-sm text-center">
-          Don't have an account? <Link to="/signup" className="text-genz-accent underline">Sign up</Link>
+  <div className="login-root">
+      {/* Left Section */}
+  <div className="login-left">
+        {/* Logo */}
+        <div className="login-logo-wrap">
+          <div className="login-logo-circle">
+            <img src="/images/blog/blogging.png" alt="Logo" className="logo-3d" style={{ height: '3rem', width: '3rem', objectFit: 'contain' }} />
+          </div>
         </div>
-      </form>
+        {/* Illustration */}
+        <div className="login-illustration">
+          {/* Placeholder SVG illustration */}
+          <svg width="220" height="160" viewBox="0 0 220 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="110" cy="140" rx="90" ry="18" fill="#2e3a8c" fillOpacity="0.3" />
+            <circle cx="60" cy="80" r="32" fill="#7c4dff" />
+            <circle cx="160" cy="90" r="28" fill="#536dfe" />
+            <rect x="90" y="40" width="40" height="60" rx="20" fill="#fff" fillOpacity="0.2" />
+            <rect x="120" y="60" width="30" height="40" rx="15" fill="#fff" fillOpacity="0.15" />
+            <rect x="50" y="100" width="60" height="20" rx="10" fill="#fff" fillOpacity="0.1" />
+          </svg>
+        </div>
+        {/* Welcome Message */}
+        <div className="login-welcome">
+          <h2>Welcome!</h2>
+          <p>Sign in to manage your documents securely and collaborate with your team.</p>
+        </div>
+      </div>
+      {/* Right Section */}
+  <div className="login-right">
+        {/* Small illustration */}
+        <div className="login-small-illustration">
+          <svg width="80" height="60" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="40" cy="55" rx="30" ry="5" fill="#2e3a8c" />
+            <rect x="30" y="20" width="20" height="25" rx="10" fill="#7c4dff" fillOpacity="0.15" />
+            <circle cx="50" cy="30" r="8" fill="#536dfe" />
+            <rect x="10" y="40" width="30" height="10" rx="5" fill="#7c4dff" fillOpacity="0.08" />
+          </svg>
+        </div>
+  <h1 className="login-title">Drive password</h1>
+  <p className="login-desc">You can sign in or register from the button below.</p>
+        {/* Info Boxes */}
+        <div className="login-info-boxes">
+          <div className="login-info-box">
+            <span className="login-info-icon">{/* Lock icon */}
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6-6V9a6 6 0 1 0-12 0v2a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2Zm-8-2a4 4 0 1 1 8 0v2H8V9Z" fill="#7c4dff"/></svg>
+            </span>
+            <span>For all users, sign in with your account...</span>
+          </div>
+          <div className="login-info-box">
+            <span className="login-info-icon">{/* Lock icon */}
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6-6V9a6 6 0 1 0-12 0v2a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2Zm-8-2a4 4 0 1 1 8 0v2H8V9Z" fill="#7c4dff"/></svg>
+            </span>
+            <span>To add new accounts, please use your Google account.</span>
+          </div>
+        </div>
+        {/* Google Sign In Button */}
+  <button className="btn-primary login-google-btn">
+          <svg width="22" height="22" viewBox="0 0 48 48"><g><path fill="#4285F4" d="M44.5 20H24v8.5h11.7C34.7 33.1 29.9 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c2.7 0 5.2.9 7.2 2.4l6.4-6.4C34.5 5.1 29.5 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 20-8.5 20-21 0-1.3-.1-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15.5 17.1 19.4 14 24 14c2.7 0 5.2.9 7.2 2.4l6.4-6.4C34.5 5.1 29.5 3 24 3 15.1 3 7.6 8.7 6.3 14.7z"/><path fill="#FBBC05" d="M24 45c5.9 0 10.9-1.9 14.5-5.1l-6.7-5.5c-2 1.4-4.5 2.2-7.8 2.2-5.9 0-10.9-3.8-12.7-9.1l-7 5.4C7.6 39.3 15.1 45 24 45z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.7c-1.1 3.1-4.2 5.5-7.7 5.5-2.2 0-4.2-.7-5.7-2.1l-7 5.4C15.1 44.3 19.3 45 24 45c10.5 0 20-8.5 20-21 0-1.3-.1-2.7-.5-4z"/></g></svg>
+          Sign in with Google
+        </button>
+  <div className="login-privacy-note">
+          By clicking Continue with Google you agree with <span className="underline cursor-pointer">Terms and conditions</span> and <span className="underline cursor-pointer">Privacy Policy</span>.
+        </div>
+        {/* Divider */}
+        <div className="login-divider">
+          <div className="login-divider-line" />
+          <span>or</span>
+          <div className="login-divider-line" />
+        </div>
+        {/* Email/Password Form */}
+  <form onSubmit={handleSubmit} className="login-form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
+          {error && <div className="login-error">{error}</div>}
+          <button className="btn-primary login-submit-btn" type="submit" disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
+        </form>
+        <Link to="/forgot-password" className="login-link">Forgot password?</Link>
+        <div className="login-link-alt">
+          Don't have an account? <Link to="/signup">Sign up</Link>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,22 +1,34 @@
 import React from 'react';
 
 const BlogCard = ({ blog, onClick }) => {
+  const date = blog.created_at || blog.createdAt;
+
   return (
     <div
-      className="card mb-6 cursor-pointer hover:shadow-2xl transition border border-genz-accent2"
+      className="card blog-card"
       onClick={onClick}
+      style={{ cursor: 'pointer' }}
     >
       <img
-        src={blog.coverImage || "/images/blog/post_cover_1.jpg"}
+        src={blog.coverImage || "/images/blog/post_cover_1.png"}
         alt="Blog Cover"
-        className="w-full h-48 object-cover rounded-xl mb-3"
+        className="blog-card-img"
+        onError={e => { e.target.onerror = null; e.target.src = "/images/blog/background.png"; }}
       />
-      <h2 className="text-2xl font-bold text-genz-accent mb-2">{blog.title}</h2>
-      <div className="muted text-xs mb-2">By {blog.author?.name || 'Unknown'} • {new Date(blog.created_at || blog.createdAt).toLocaleDateString()}</div>
-      <p className="text-genz-text mb-2 line-clamp-3">{blog.content}</p>
-      <div className="flex flex-wrap gap-2 mt-2">
+
+      <h2 className="blog-card-title">{blog.title}</h2>
+
+      <div className="muted blog-card-meta">
+        By {blog.author?.name || 'Unknown'} • {date ? new Date(date).toLocaleDateString() : 'No date'}
+      </div>
+
+      <p className="blog-card-content">
+        {blog.content}
+      </p>
+
+      <div className="blog-card-tags">
         {blog.tags && blog.tags.map((tag, i) => (
-          <span key={i} className="bg-genz-accent2 text-white px-2 py-1 rounded-full text-xs">#{tag}</span>
+          <span key={i} className="blog-card-tag">#{tag}</span>
         ))}
       </div>
     </div>

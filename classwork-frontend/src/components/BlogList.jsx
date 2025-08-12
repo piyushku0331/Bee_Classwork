@@ -13,7 +13,31 @@ const BlogList = () => {
       setError('');
       try {
         const res = await getAllBlogs();
-        setBlogs(res.data || []);
+        if (res.data && res.data.length > 0) {
+          setBlogs(res.data);
+        } else {
+          // Add test data if no blogs exist
+          setBlogs([
+            {
+              _id: 'test1',
+              title: 'Welcome to Blogify!',
+              content: 'This is a sample blog post. Start writing your own blogs now!',
+              author: { name: 'Admin' },
+              tags: ['welcome', 'sample'],
+              created_at: new Date().toISOString(),
+              coverImage: '/images/blog/post_cover_1.png',
+            },
+            {
+              _id: 'test2',
+              title: 'GenZ UI/UX Tips',
+              content: 'Make your blog stand out with modern design and dark mode support.',
+              author: { name: 'Jane Doe' },
+              tags: ['design', 'genz'],
+              created_at: new Date().toISOString(),
+              coverImage: '/images/blog/post_cover_2.png',
+            },
+          ]);
+        }
       } catch (err) {
         setError('Failed to load blogs.');
       } finally {

@@ -10,7 +10,7 @@ const BLOG_SCHEMA = new MONGOOSE.Schema({
         reqired: true
     },
     author: {
-        type: MONGOOSE.Schema.Types.name,
+        type: MONGOOSE.Schema.Types.ObjectId,
         ref: 'User_DATA',
         required: true
     },
